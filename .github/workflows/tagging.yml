@@ -17,4 +17,7 @@ jobs:
 
       - name: Tagging
         run: |
-          git describe
+          CUR_TAG=$(git describe | cut -f 3 -d. | cut -f 1 -d-)
+          TAG=$(( $CUR_TAG + 1 ))
+          echo $TAG
+
