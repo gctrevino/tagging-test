@@ -1,0 +1,19 @@
+name: Tagging Repo
+
+on:
+  push:
+    - master
+
+jobs:
+  tagging:
+    name: Tagging
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+
+      - name: Tagging
+        run: |
+          tag describe
