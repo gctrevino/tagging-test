@@ -3,7 +3,7 @@ name: Tagging Repo
 on:
   push:
     branches:
-      - master
+      - test3
 
 jobs:
   tagging:
@@ -17,4 +17,4 @@ jobs:
 
       - name: Tagging
         run: |
-          tag describe
+          git describe
