@@ -17,7 +17,8 @@ jobs:
 
       - name: Tagging
         run: |
-          CUR_TAG=$(git describe | cut -f 3 -d. | cut -f 1 -d-)
-          TAG=$(( $CUR_TAG + 1 ))
-          echo $TAG
+          MAJOR=$(git describe | cut -f 1 -d. | cut -f 1 -d-)
+          MINOR=$(git describe | cut -f 2 -d. | cut -f 1 -d-)
+          PATCH=$(( $(git describe | cut -f 3 -d. | cut -f 1 -d-) + 1 ))
+          echo $MAJOR.$MINOR.$PATCH
 
