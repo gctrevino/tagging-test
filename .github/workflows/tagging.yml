@@ -29,13 +29,29 @@ jobs:
             debug: true
             script: |
               github.git.createTag({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag: "${{ env.NEW_TAG }}",
-                message: "Sample message",
-                object: context.sha,
-                type: "commit"
+                owner: 'OWNER',
+                repo: 'REPO',
+                tag: '0.0.3',
+                message: 'initial version',
+                object: 'e476048d21725e688777ceec31c75c872ba70660',
+                type: 'commit',
+                tagger: {
+                  name: 'Monalisa Octocat',
+                  email: 'octocat@github.com',
+                  date: '2022-06-17T14:53:35-07:00'
+                }
               })
+
+#
+#            github.git.createTag({
+#                owner: context.repo.owner,
+#                repo: context.repo.repo,
+#                tag: ${{ env.NEW_TAG }},
+#                message: "Sample message",
+#                object: context.sha,
+#                type: "commit"
+#              })
+#
 
       - name: Create Reference
         uses: actions/github-script@v6
