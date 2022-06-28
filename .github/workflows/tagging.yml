@@ -28,14 +28,13 @@ jobs:
         with:
             github-token: ${{ github.token }}
             script: |
-              const newTag = ${{ env.NEW_TAG }}
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: newTag,
-                message: 'Sample message',
+                tag: "${{ env.NEW_TAG }}",
+                message,
                 object: context.sha,
-                type: 'commit',
+                type,
                 tagger.name: 'X',
                 tagger.email: 'Y',
               })
