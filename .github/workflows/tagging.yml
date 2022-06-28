@@ -34,11 +34,7 @@ jobs:
                 tag: "${{ env.NEW_TAG }}",
                 message: "Sample message",
                 object: context.sha,
-                type: "commit",
-                tagger: {
-                  name: "octocat",
-                  email: "octocat@github.com"
-                }
+                type: "commit"
               })
 
       - name: Create Reference
