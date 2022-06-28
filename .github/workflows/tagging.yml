@@ -30,12 +30,12 @@ jobs:
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: "${{ env.NEW_TAG }}",
-                message: "Sample message",
+                tag: ${{ env.NEW_TAG }},
+                message: 'Sample message',
                 object: context.sha,
-                type: commit,
-                tagger.name: "X",
-                tagger.email: "Y"
+                type: 'commit',
+                tagger.name: 'X',
+                tagger.email: 'Y'
               })
 
       - name: Create Reference
