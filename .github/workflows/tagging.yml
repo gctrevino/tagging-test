@@ -30,14 +30,13 @@ jobs:
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: '${{ env.NEW_TAG }}',
-                message: 'Sample message',
+                tag: "v${{ env.NEW_TAG }}",
+                message: "Sample message",
                 object: context.sha,
                 type: commit,
                 tagger: {
-                  name: 'octocat',
-                  email: 'octocat@github.com',
-                  date: '2011-06-17T14:53:35-07:00'
+                  name: "octocat",
+                  email: "octocat@github.com"
                 }
               })
 
