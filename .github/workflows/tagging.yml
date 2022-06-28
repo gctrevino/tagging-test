@@ -24,6 +24,8 @@ jobs:
 
       - name: Create Tag
         uses: actions/github-script@v3
+        env:
+          debug: true
         with:
             github-token: ${{ github.token }}
             script: |
@@ -37,7 +39,6 @@ jobs:
                 type: 'commit',
                 tagger.name: 'X',
                 tagger.email: 'Y',
-                debug: true
               })
 
       - name: Create Reference
