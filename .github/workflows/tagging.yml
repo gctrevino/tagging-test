@@ -20,28 +20,31 @@ jobs:
           MINOR=$(git describe | cut -f 2 -d. | cut -f 1 -d-)
           PATCH=$(( $(git describe | cut -f 3 -d. | cut -f 1 -d-) + 2 ))
           echo $MAJOR.$MINOR.$PATCH
+          echo ${{ github.sha }}
           echo "NEW_TAG=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
       - name: Create Tag
         uses: actions/github-script@v3
         with:
-            github-token: ${{ github.token }}
+            debug: true
             script: |
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: "${{ env.NEW_TAG }}",
-                message: "Sample message",
+                tag: '0.0.3',
+                message: 'initial version',
                 object: context.sha,
-                type: commit,
-                tagger.name: "X",
-                tagger.email: "Y"
+                type: 'commit',
+                tagger: {
+                  name: 'Monalisa Octocat',
+                  email: 'octocat@github.com',
+                  date: '2022-06-17T14:53:35-07:00'
+                }
               })
 
       - name: Create Reference
         uses: actions/github-script@v3
         with:
-            github-token: ${{ github.token }}
             script: |
               github.git.createRef({
                 owner: context.repo.owner,
