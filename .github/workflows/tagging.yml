@@ -37,6 +37,7 @@ jobs:
   step2:
     name: Step 2
     runs-on: ubuntu-22.04
+    if: ${{ always() }}
     needs: tagging
     steps:
       - name: Next step
