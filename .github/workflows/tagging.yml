@@ -26,23 +26,24 @@ jobs:
       - name: Create Tag
         uses: actions/github-script@v6
         with:
-            github-token: ${{ github.token }}
             script: |
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: "${{ env.NEW_TAG }}",
+                tag: '${{ env.NEW_TAG }}',
                 message: 'Sample message',
                 object: context.sha,
-                type: 'commit',
-                tagger.name: 'X',
-                tagger.email: 'Y',
+                type: commit,
+                tagger: {
+                  name: 'octocat',
+                  email: 'octocat@github.com',
+                  date: '2011-06-17T14:53:35-07:00'
+                }
               })
 
       - name: Create Reference
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
-            github-token: ${{ github.token }}
             script: |
               github.git.createRef({
                 owner: context.repo.owner,
