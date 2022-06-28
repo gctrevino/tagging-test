@@ -21,4 +21,16 @@ jobs:
           MINOR=$(git describe | cut -f 2 -d. | cut -f 1 -d-)
           PATCH=$(( $(git describe | cut -f 3 -d. | cut -f 1 -d-) + 1 ))
           echo $MAJOR.$MINOR.$PATCH
+          echo "NEW_TAG=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
+      - name: Create Tag
+        uses: actions/github-script@v3
+        with:
+            github-token: ${{ github.token }}
+            script: |
+              github.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              ref: "refs/tags/${{ env.NEW_TAG }}",
+                sha: context.sha
+              })
