@@ -2,13 +2,12 @@ name: Tagging Repo
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   tagging:
     name: Tagging
-    runs-on: ubuntu-20.04
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v2
@@ -17,4 +16,29 @@ jobs:
 
       - name: Tagging
         run: |
-          tag describe
+          MAJOR=$(git describe | cut -f 1 -d. | cut -f 1 -d-)
+          MINOR=$(git describe | cut -f 2 -d. | cut -f 1 -d-)
+          PATCH=$(( $(git describe | cut -f 3 -d. | cut -f 1 -d-) + 1 ))
+          echo $MAJOR.$MINOR.$PATCH
+          echo "NEW_TAG=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+
+      - name: Create Tag
+        uses: actions/github-script@v3
+        with:
+            github-token: ${{ github.token }}
+            script: |
+              github.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: "refs/tags/${{ env.NEW_TAG }}",
+                sha: context.sha
+              })
+
+  step2:
+    name: Step 2
+    runs-on: ubuntu-22.04
+    if: ${{ always() }}
+    needs: tagging
+    steps:
+      - name: Next step
+        run: echo Next step
