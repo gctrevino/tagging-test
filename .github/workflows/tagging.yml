@@ -26,7 +26,6 @@ jobs:
       - name: Create Tag
         uses: actions/github-script@v3
         with:
-            github-token: ${{ github.token }}
             script: |
               github.git.createTag({
                 owner: context.repo.owner,
