@@ -24,7 +24,7 @@ jobs:
           echo "NEW_TAG=v$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
       - name: Create Tag
-        uses: actions/github-script@v18
+        uses: actions/github-script@v6
         with:
             github-token: ${{ github.token }}
             script: |
