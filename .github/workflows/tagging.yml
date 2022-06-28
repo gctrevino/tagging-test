@@ -27,6 +27,22 @@ jobs:
         with:
             github-token: ${{ github.token }}
             script: |
+              github.git.createTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: "${{ env.NEW_TAG }}",
+                message: "Sample message",
+                object: context.sha,
+                type: commit,
+                tagger.name: "X",
+                tagger.email: "Y"
+              })
+
+      - name: Create Reference
+        uses: actions/github-script@v3
+        with:
+            github-token: ${{ github.token }}
+            script: |
               github.git.createRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
