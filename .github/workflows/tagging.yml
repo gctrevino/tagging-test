@@ -27,7 +27,7 @@ jobs:
         with:
             github-token: ${{ github.token }}
             script: |
-              let newTag = {{ env.NEW_TAG }}
+              let newTag = ${{ env.NEW_TAG }}
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
