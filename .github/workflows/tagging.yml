@@ -20,7 +20,7 @@ jobs:
           MINOR=$(git describe | cut -f 2 -d. | cut -f 1 -d-)
           PATCH=$(( $(git describe | cut -f 3 -d. | cut -f 1 -d-) + 2 ))
           echo $MAJOR.$MINOR.$PATCH
-          echo ${{ github.context.sha }}
+          echo ${{ github.sha }}
           echo "NEW_TAG=v$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
       - name: Create Tag
