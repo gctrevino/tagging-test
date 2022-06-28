@@ -30,7 +30,7 @@ jobs:
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: ${{ env.NEW_TAG }},
+                tag: '${{ env.NEW_TAG }}',
                 message: 'Sample message',
                 object: context.sha,
                 type: 'commit',
