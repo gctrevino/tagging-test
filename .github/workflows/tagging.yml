@@ -36,7 +36,8 @@ jobs:
                 object: context.sha,
                 type: 'commit',
                 tagger.name: 'X',
-                tagger.email: 'Y'
+                tagger.email: 'Y',
+                debug: true
               })
 
       - name: Create Reference
