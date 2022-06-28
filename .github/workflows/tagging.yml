@@ -2,12 +2,11 @@ name: Tagging Repo
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   tagging:
     name: Tagging
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout the Repo
