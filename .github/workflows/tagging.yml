@@ -31,7 +31,7 @@ jobs:
               github.git.createTag({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                tag: '0.0.3',
+                tag: '${{ env.NEW_TAG }}',
                 message: 'initial version',
                 object: context.sha,
                 type: 'commit',
