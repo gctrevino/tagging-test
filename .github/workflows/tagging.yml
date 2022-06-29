@@ -44,7 +44,7 @@ jobs:
               github.git.createRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: "refs/tags/${{ env.NEW_TAG }}",
+                ref: "refs/heads/master",
                 sha: context.sha
               }).catch((error) => {
                 core.setFailed(`Failed tagging. Reason: ${error}`);
