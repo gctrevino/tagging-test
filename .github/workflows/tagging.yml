@@ -1,7 +1,6 @@
 name: Tagging Repo
 
 on:
-  pull_request:
   push:
 
 jobs:
