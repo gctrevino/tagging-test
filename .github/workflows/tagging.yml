@@ -51,6 +51,11 @@ jobs:
               })
             });
 
+      - name: Test
+        run: |
+          git describe
+          git describe --all
+
   step2:
     name: Step 2
     runs-on: ubuntu-22.04
