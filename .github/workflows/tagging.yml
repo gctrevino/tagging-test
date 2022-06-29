@@ -24,34 +24,31 @@ jobs:
           echo "NEW_TAG=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
 
       - name: Create Tag
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
-            debug: true
-            script: |
-              github.git.createTag({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag: '${{ env.NEW_TAG }}',
-                message: 'initial version',
-                object: context.sha,
-                type: 'commit',
-                tagger: {
-                  name: 'Monalisa Octocat',
-                  email: 'octocat@github.com',
-                  date: '2022-06-17T14:53:35-07:00'
-                }
-              })
-
-      - name: Create Reference
-        uses: actions/github-script@v3
-        with:
-            script: |
+          debug: true
+          script: |
+            github.git.createTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: '${{ env.NEW_TAG }}',
+              message: 'initial version',
+              object: context.sha,
+              type: 'commit',
+              tagger: {
+                name: 'Monalisa Octocat',
+                email: 'octocat@github.com',
+                date: '2022-06-17T14:53:35-07:00'
+              }
+            }).then(() => {
               github.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: "refs/tags/${{ env.NEW_TAG }}",
-                sha: context.sha
-              })
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ env.NEW_TAG }}",
+              sha: context.sha
+            }).catch((error) => {
+              core.setFailed(`Failed tagging. Reason: ${error}`);
+            });
 
   step2:
     name: Step 2
