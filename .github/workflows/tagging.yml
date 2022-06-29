@@ -42,12 +42,13 @@ jobs:
               }
             }).then(() => {
               github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ env.NEW_TAG }}",
-              sha: context.sha
-            }).catch((error) => {
-              core.setFailed(`Failed tagging. Reason: ${error}`);
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: "refs/tags/${{ env.NEW_TAG }}",
+                sha: context.sha
+              }).catch((error) => {
+                core.setFailed(`Failed tagging. Reason: ${error}`);
+              })
             });
 
   step2:
